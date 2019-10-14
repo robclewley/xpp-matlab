@@ -1,0 +1,43 @@
+# HH_slowNa.ode
+# HH cell with slow sodium
+# Cell membrane parameters
+par g_na=100,g_k=80,g_l=0.1
+par vna=50,vk=-90,vl=-67
+par g_p=0.2, vp=55
+par c_som=1
+
+# Conductance equation
+v'= (-g_na*m^3*h*(v-vna)-g_p*mp*(v-vp)-g_k*n^4*(v-vk)-g_l*(v-vl)+i)/c_som
+
+# Activation variables
+h'=(hinf(v)-h)/htau(v)
+n'=(ninf(v)-n)/ntau(v)
+m'=ma(v)*(1-m)-mb(v)*m
+mp'= (mpinf(v) - mp) / mptau(v)
+
+# Applied current
+par i=-1
+
+# Activation equations
+ma(vx)=0.1*(vx+60)/(1-exp(-(vx+60)/15))
+mb(vx)=0.6*(vx+26)/(exp((vx+26)/8)-1)
+hinf(vx)=1.0/(1.0+exp(0.13*(vx+38.0)))
+htau(vx)=0.6/(1.0+exp(-0.12*(vx+67.0)))
+ninf(vx)=1.0/(1.0+exp(-0.045*(vx+10.0)))
+ntau(vx)=0.5+2.0/(1.0+exp(0.045*(vx-50.0)))
+mpinf(vx)=mpalpha(vx)/(mpalpha(vx)+mpbeta(vx))
+mptau(vx)=1/(mpalpha(vx)+mpbeta(vx))
+mpalpha(vx)=1/(0.15*(1+exp(-(vx+38)/6.5)))
+mpbeta(vx)=exp(-(vx+38)/6.5)/(0.15*(1+exp(-(vx+38)/6.5)))
+
+# Initial conditions
+init v=-65, h=1
+
+count'=0
+stopsim'=0
+global 1 v-0 {count=count+1}
+global 1 count-10 {stopsim=100000}
+
+@ total=600, xhi=300, ylo=-95, yhi=45
+@ method=cvode, dt=0.1, bounds=1000
+done

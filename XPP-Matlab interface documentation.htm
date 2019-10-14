@@ -1,0 +1,549 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 10">
+<meta name=Originator content="Microsoft Word 10">
+<link rel=File-List
+href="XPP-Matlab%20interface%20documentation_files/filelist.xml">
+<title>XPP-Matlab interface documentation</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Robert Clewley</o:Author>
+  <o:LastAuthor>Robert Clewley</o:LastAuthor>
+  <o:Revision>6</o:Revision>
+  <o:TotalTime>1374</o:TotalTime>
+  <o:Created>2004-08-31T04:31:00Z</o:Created>
+  <o:LastSaved>2004-08-31T20:30:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>1228</o:Words>
+  <o:Characters>7006</o:Characters>
+  <o:Company>Boston University</o:Company>
+  <o:Lines>58</o:Lines>
+  <o:Paragraphs>16</o:Paragraphs>
+  <o:CharactersWithSpaces>8218</o:CharactersWithSpaces>
+  <o:Version>10.2625</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:Arial;
+	mso-font-kerning:16.0pt;}
+h2
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:14.0pt;
+	font-family:Arial;
+	font-style:italic;}
+h3
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+table.MsoTableGrid
+	{mso-style-name:"Table Grid";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	border:solid windowtext 1.0pt;
+	mso-border-alt:solid windowtext .5pt;
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-border-insideh:.5pt solid windowtext;
+	mso-border-insidev:.5pt solid windowtext;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";}
+</style>
+<![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h1>XPP – Matlab interface</h1>
+
+<p class=MsoNormal>© Robert Clewley, August 2004 version.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h2>Introduction</h2>
+
+<p class=MsoNormal>This document describes three Matlab utilities that provide
+an elementary interface between Matlab and Bard Ermentrout’s XPP software. They
+have been tested on Linux and Windows platforms, but not yet on Macs. There
+should be no problem using these functions on Macs, but please let me know if
+there are. I have assumed the name of the XPP command in Mac OS is <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>xppaut</span>. If this is not the case
+on your computer then the command string can be passed explicitly to the Matlab
+function that calls XPP (see below).</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>The principal use of the utilities is to run large batch
+jobs which involve several range parameters, or to change parameters or initial
+conditions interactively with XPP as part of a numerical search algorithm.
+Matlab’s internal differential equation solvers are often slower than their
+equivalent implementations in XPP, and for large coupled systems they are less
+intuitive to code in my opinion. While there is some overhead involved in
+loading an ASCII-format simulation data file into Matlab for every XPP batch
+run, I have found the loss of speed a small price to pay for the added
+convenience. I compared XPP’s internal range facility, over two parameters,
+with an equivalent Matlab script that implemented the same ranges, and found
+that my Matlab scripts ran approximately 30% slower.<span
+style='mso-spacerun:yes'>  </span>(Omitting auxiliary variables from the
+version of the ODE file manipulated by these utilities can cut this overhead
+substantially.)</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Additionally, these utilities provide a means to
+post-process XPP simulation data with any of the statistical functions built
+into Matlab, or your own. For instance, the included utility <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>GetCrossings</span> finds threshold
+crossings in continuous-time data (e.g. spike times in neural membrane
+potentials), from which spiking frequencies are easily computed. This means
+that less experienced XPP users may therefore find that they can interact with
+XPP without having to learn to write dynamically linked C library functions, or
+to cunningly hack “exotic” XPP solutions to their data processing needs (no
+offense, Bard :).</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Two utilities (<span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>ChangeXPPodeFile</span>
+and <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>ChangeXPPsetFile</span>) are designed
+to provide a simple way for the user to change initial conditions and parameter
+values of named variables and parameters in either an XPP ‘.ode’ or ‘.set’ file
+that you have already set up. <i style='mso-bidi-font-style:normal'>Keeping
+backups of these files is very important</i> before you let these utilities
+stomp all over your carefully-tuned parameter set. The values to be changed in
+the XPP files are set up using a Matlab structure array, which resembles a C
+structure array. For instance, if you wanted to change two parameters and one
+initial condition for an ODE, you could build the following structure array in
+a Matlab script. The array can be in any order, provided every entry is a
+structure having precisely three fields: <i style='mso-bidi-font-style:normal'>type</i>
+(string, either ‘IC’ or ‘PAR’), <i style='mso-bidi-font-style:normal'>name</i>
+(string, a valid name of a variable or parameter in the ODE file), and <i
+style='mso-bidi-font-style:normal'>val</i> (any finite real number).</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>mypars<o:p></o:p></span></p>
+
+<p class=MsoNormal align=center style='text-align:center'>|</p>
+
+<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0
+ style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:480;mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext'>
+ <tr style='mso-yfti-irow:0'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+  mso-bidi-font-family:"Times New Roman"'>mypars(1)<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+  mso-bidi-font-family:"Times New Roman"'>mypars(2)<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal align=center style='text-align:center'><span
+  style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+  mso-bidi-font-family:"Times New Roman"'>mypars(3)<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-top-alt:solid windowtext .5pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(1).type
+  = ‘IC’<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:none;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(2).type
+  = ‘PAR’<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:none;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(3).type
+  = ‘PAR’<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  solid windowtext 1.0pt;border-bottom:none;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(1).name
+  = ‘x’<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:none;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(2).name
+  = ‘a’<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border:none;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-right-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(3).name
+  = ‘c’<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+  <td width=197 valign=top style='width:2.05in;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-left-alt:solid windowtext .5pt;mso-border-bottom-alt:
+  solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;padding:
+  0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(1).val
+  = 0.5<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(2).val
+  = 3.1e-5<o:p></o:p></span></p>
+  </td>
+  <td width=197 valign=top style='width:2.05in;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-left-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-bottom-alt:solid windowtext .5pt;mso-border-right-alt:solid windowtext .5pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+  font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>mypars(3).val
+  = 100<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>The function <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>RunXPP</span>
+is a simple way to run XPP as a command-line executed call from within Matlab,
+that allows specification of a SET file or the re-seeding of the random number
+generator. The ODE or SET files should already be changed using the above
+utilities before calling <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>RunXPP</span>.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>The final utility, <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>GetCrossings</span>,
+gives a simple method to take a loaded data set and search for threshold
+crossings within particular variables’ time-courses. The threshold is an
+argument to the function, as is the direction of threshold traversal, which is
+specified the same way as for the <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>global</span>
+command in XPP.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Also included is an ODE file, <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>HH_slowNa.ode</span>,
+describing a model for a Hodgkin-Huxley neuron with a slow potassium current,
+and a Matlab script, <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>meshplot_example.m</span>,
+for calculating the frequency response as two parameters are varied, the
+current drive and the slow potassium maximal conductance. The script produces a
+3-dimensional plot of the frequency response surface, which is included as the
+file <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>freq_mesh.fig</span>. This script
+combines the use of all the included utilities, and can be used as a basis for
+development of your own scripts and functions. It contains numerous comments.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Finally, if you have any error reports or suggestions for
+development of these functions please email me.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h2>Description of the Matlab functions</h2>
+
+<h3>ChangeXPPodeFile</h3>
+
+<p class=MsoNormal>Change parameters / initial conditions in XPP ODE file</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New"'>success
+= ChangeXPPodeFile(filename, parset)<o:p></o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>ChangeXPPodeFile</span>
+changes the values of the parameters and initial conditions named in the <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>parset</span> structure by directly
+modifying the named ODE file. The return value <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>success</span>
+is a boolean.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>All initial conditions to be changed must be explicitly
+declared in the ODE file using <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>init</span>
+or <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>i</span>, not using the format <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>x(0)</span> for a variable <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>x</span>, etc. Also,
+implicitly-declared zero initial conditions cannot be altered by this function.
+This function has to be able to find an explicit declaration of the initial
+condition in order to change it. For the latter occasions, you might find it
+better to use the <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>ChangeXPPsetFile</span>
+function instead, along with the <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>setfile</span>
+option of <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:
+"Courier New";mso-bidi-font-family:"Times New Roman"'>RunXPP</span>. 'number'
+declarations in XPP are also not supported as range parameters.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Input arguments:</p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>filename</span>
+must end with the extension '.ode'</p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>parset</span>
+is a structure array with fields <i style='mso-bidi-font-style:normal'>type</i>,
+<i style='mso-bidi-font-style:normal'>name</i>, and <i style='mso-bidi-font-style:
+normal'>val</i>. The type must be one of the strings 'PAR' or 'IC'.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h3>ChangeXPPsetFile</h3>
+
+<p class=MsoNormal>Change parameters / initial conditions in XPP SET file</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New"'>success
+= ChangeXPPsetFile(filename, parset)<o:p></o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>ChangeXPPsetFile</span>
+changes the values of the parameters and initial conditions named in the <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>parset</span> structure by directly
+modifying the named SET file. The return value <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>success</span>
+is a boolean.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>Input arguments:</p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>filename</span>
+should end with the extension '.set'</p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>parset</span>
+is a structure array with fields <i style='mso-bidi-font-style:normal'>type</i>,
+<i style='mso-bidi-font-style:normal'>name</i>, and <i style='mso-bidi-font-style:
+normal'>val</i>. The type must be one of the strings 'PAR' or 'IC'.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h3>RunXPP</h3>
+
+<p class=MsoNormal>Run XPP in silent mode</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New"'>success
+= RunXPP(odeFilename, setFilename, newseed, xppname)<o:p></o:p></span></p>
+
+<p class=MsoNormal><span style='mso-spacerun:yes'> </span></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>RunXPP</span>
+runs the XPP executable that is assumed to be in the local directory on the ODE
+file <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>odeFilename</span> (with extension
+‘.ode’). The optional string argument <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>setFilename</span>
+can be set to the name of a SET file which will be used by the silent runs of
+XPP. The optional boolean argument <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>newseed</span>
+(default is false) that signals XPP to re-seed its random number generator, for
+instance when running simulations involving random variables. The final,
+optional, argument <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>xppname</span>
+additionally specifies the name of the XPP executable file if the default name ‘xppaut’
+that is assumed by <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>RunXPP</span>
+is not correct. The return value <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>success</span>
+is a boolean.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<h3>GetCrossings</h3>
+
+<p class=MsoNormal>Convert simulation output data into threshold crossing times</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;font-family:"Courier New"'>crossings
+= GetCrossings(data, threshold, maxcrossings, dirn, indices, verboseTog)<o:p></o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>GetCrossings</span>
+takes an array of simulation data with time in the first column, variables in
+remaining columns, and a threshold crossing value. This function detects
+threshold crossings in the direction given by <span style='font-size:10.0pt;
+font-family:"Courier New"'>dirn</span> in all variables. Use <span
+style='font-size:10.0pt;font-family:"Courier New"'>dirn</span> = -1 for
+decreasing threshold crossings, 1 for increasing threshold crossings. Use<span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'> dirn</span> = 0 for detection of all
+threshold crossings, in either direction. Linear interpolation is used to find
+the crossing times accurately. The optional 5th argument <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>indices</span> is a list of indices to
+select from the variable columns (when there are mixture of spiking and
+non-spiking variables present in the passed data set). If it is omitted, all
+the variable columns are searched.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>The result is an array, <span style='font-size:10.0pt;
+mso-bidi-font-size:12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>crossings</span>,
+having dimensions |<span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;
+font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>indices</span>|
+by <span style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>maxcrossings</span>. In each of the
+rows are the crossing times of each variable in the passed data set. <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>maxcrossings</span> is set to 100 by
+default if it is omitted. However, if <span style='font-size:10.0pt;mso-bidi-font-size:
+12.0pt;font-family:"Courier New";mso-bidi-font-family:"Times New Roman"'>maxcrossings</span>
+is set at 0, the function returns a cell array of crossing time cell arrays,
+with rows of length equal to the number of crossings in the data.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal>The final, optional, boolean argument <span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt;font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman"'>verboseTog</span> controls suppression
+of warning messages (defaults to false).</p>
+
+</div>
+
+</body>
+
+</html>
